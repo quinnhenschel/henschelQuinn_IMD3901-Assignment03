@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>DS3 Assignment 3</title>
+        <script src="js/aframe-v0.8.2.min.js"></script>
+        <script src="js/master.js"></script>
+        <script src="js/socket.io.min.js"></script>
+        <script src="js/event-generator.js"></script>
+
+    </head>
+              
+    <body>
+        <a-scene>
+            <!-------------- TEXTURES ---------------->
+            <a-assets>
+                <img id="skymap" src="assets/textures/sunsetGradient.png" />
+            </a-assets>
+
+
+            <!-------------- SOUNDS ---------------->
+            <a-assets>
+
+            </a-assets>
+            
+
+            <!---------------- MODELS ---------------->
+            <a-assets>
+                <a-asset-item id="maze_model" src="assets/models/maze.obj"></a-asset-item>
+                <a-asset-item id="button_model" src="assets/models/button.obj"></a-asset-item>
+                <a-asset-item id="door1_1_model" src="assets/models/door1_1.obj"></a-asset-item>
+            </a-assets>
+
+
+            <!---------------- CAMERA ---------------->
+            <a-entity id="cameraRig" position="0 1.9 0" rotation="0 0 0">
+                <a-entity id="cursor" cursor="rayOrigin: mouse" position="0 0 -1"></a-entity>
+            </a-entity>
+
+
+            <!---------------- LIGHTING ---------------->
+            <a-light type="point" color="lightblue" position="15 20 0" intensity="0.3"></a-light>
+
+
+            <!---------------- A-FRAME ENTITIES ---------------->
+            
+            <a-entity 
+                id="area" 
+                obj-model="obj:#maze_model" 
+                position="" 
+                rotation="" 
+                scale="" 
+                shadow=""
+                
+                
+                >
+            </a-entity>
+
+            <a-entity 
+            id="startButton" 
+            obj-model="obj:#button_model" 
+            position="3 1.5 -5.258" 
+            rotation="" 
+            scale="0.75 0.75 0.75" 
+            shadow=""
+            material="color: #ffffff; emissive: #ffffff; emissiveIntensity: 0.3;" 
+            
+            event-generator
+            >
+            </a-entity>
+
+            <a-entity 
+            id="door1_1" 
+            obj-model="obj:#door1_1_model" 
+            position="" 
+            rotation="" 
+            scale="" 
+            shadow=""
+            material="" 
+            >
+            </a-entity>
+            
+            <a-sky color="#ECECEC" ></a-sky>
+            <a-entity   id="sky"
+                        rotation="0 180 0"
+                        geometry="primitive: sphere; radius: 1000"
+                        material="shader: flat; src: #skymap; side: back"
+                        loadscripts>
+            </a-entity>
+
+            
+        </a-scene>
+        
+
+        <script>
+            senderID = 'player1';            
+        </script>
+
+        <script src="js/eventSender.js"></script>
+        <script src="js/eventReceiver.js"></script>
+
+        
+    </body>
+</html>

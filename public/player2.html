@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="js/socket.io.min.js"></script>
+        <script src="js/master.js"></script>
+    </head>
+    <body>
+        <h1>This is the controller client</h1>
+
+        <!-- some very nice color buttons -->
+        <button id="moveMaze" style="background-color:red; color:whitesmoke;">Move Maze</button>    
+
+        <!-- scripts go to bottom if you want them to execute AFTER the rest of the web page renders -->
+
+        <script>
+            senderID = 'player2';            
+        </script>
+
+        <script src="js/eventSender.js"></script>
+        <script src="js/eventReceiver.js"></script>
+
+    </body>
+</html>
