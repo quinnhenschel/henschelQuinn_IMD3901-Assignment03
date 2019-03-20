@@ -1,5 +1,5 @@
 {
-  "name": "new-proj",
+  "name": "henschel-quinn-assignment-03",
   "version": "1.0.0",
   "description": "![alt text](https://github.com/ASelfridge/Stew-Dio/blob/master/blogAssets/StewIt-Logo.PNG)",
   "main": "app.js",
@@ -11,8 +11,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Quinn Henschel",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/quinnhenschel/henschelQuinn_IMD3901-Assignment03.git"

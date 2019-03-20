@@ -19,13 +19,12 @@ if(senderID == 'player2')
         socket.emit('clickedStart');
         console.log("moveMaze sent");
     });
-
 }
 
-
 //player1
-function clickedStartButton() {
-    socket.emit('clickedStart');
+function clickedButton(clickedObj)
+{
+    socket.emit('buttonClicked', {clicked:clickedObj});
 }
 
 

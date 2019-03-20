@@ -33,10 +33,10 @@ socketIO.on('connection', function(socket) {
         socketIO.sockets.emit('move_maze', {r:255, g:0, b:0});
     });
 
-    socket.on('clickedStart', function(){
-        console.log('clickedStart event heard');
-        socketIO.sockets.emit('clicked_start');
-    });
+    socket.on('buttonClicked', function(clickedObj) {
+        console.log("clicked" + clickedObj);
+        socketIO.sockets.emit('buttonClicked', {clicked:clickedObj});
+    })
 
 });
 

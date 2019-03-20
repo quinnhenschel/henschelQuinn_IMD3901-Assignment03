@@ -7,16 +7,8 @@ AFRAME.registerComponent('event-generator', {
         let scene = document.querySelector('a-scene');
 
         el.addEventListener('mousedown', function() {
-            Context_AF.eventLogic(el.id);
+            //Context_AF.eventLogic(el.id);
+            clickedButton(el.id);
         });
-        
-    },
-    eventLogic: function(clickedObj) {
-
-        if (clickedObj == 'startButton')
-        {
-            clickedStartButton();
-        }
-
     }
 });
