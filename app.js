@@ -3,6 +3,9 @@ const app       = express();
 const http      = require('http');
 const server    = http.createServer(app);
 const socketIO  = require('socket.io')(server); //hello I am new
+    //socket = one client
+    //socketIO.sockets = all clients
+    
 
 const LISTEN_PORT = 8080; //make sure greater than 3000. Some ports are reserved/blocked by firewall ...
 
@@ -20,23 +23,27 @@ app.get('/controller', function(req,res) {
 //websocket stuff
 socketIO.on('connection', function(socket) {
     console.log(socket.id + ' has connected!');
+    
 
     socket.on('disconnect', function(data) {
         console.log(socket.id + ' has disconnected');
     });
 
-    //custom events
-    //socket = one client
-    //socketIO.sockets = all clients
-    socket.on('moveMaze', function(data) {
-        console.log('moveMaze event heard');
-        socketIO.sockets.emit('move_maze', {r:255, g:0, b:0});
+    ///////////////////// CUSTOM SOCKET EVENT LISTENERS + FUNCTIONS /////////////////////
+
+    //////////// FROM PLAYER 2 ////////////
+
+    socket.on('svg_clicked', function(id) {
+        socketIO.sockets.emit('svgClicked', {clicked:id});
     });
 
+    //////////// FROM PLAYER 1 ////////////
+
     socket.on('buttonClicked', function(clickedObj) {
-        console.log("clicked" + clickedObj);
         socketIO.sockets.emit('buttonClicked', {clicked:clickedObj});
     })
+
+    ////////////////////////////////////////////////////////////////////////////////////
 
 });
 

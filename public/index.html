@@ -12,7 +12,7 @@
         <a-scene>
             <!-------------- TEXTURES ---------------->
             <a-assets>
-                <img id="skymap" src="assets/textures/sunsetGradient.png" />
+                <img id="skymap" src="assets/textures/skybox.jpg" />
             </a-assets>
 
 
@@ -37,7 +37,7 @@
 
 
             <!---------------- LIGHTING ---------------->
-            <a-light type="point" color="lightblue" position="15 20 0" intensity="0.3"></a-light>
+            <a-light type="point" color="lightblue" position="0 60 -60" intensity="0.2"></a-light>
 
 
             <!---------------- A-FRAME ENTITIES ---------------->
@@ -51,6 +51,8 @@
                 shadow=""
             >
             </a-entity>
+
+            <!-- STARTING AREA -->
 
             <a-entity 
                 id="startButton" 
@@ -76,6 +78,8 @@
             >
             </a-entity>
 
+            <!-- INTERSECTION 1 -->
+
             <a-entity 
                 id="area1StartButton" 
                 obj-model="obj:#button_model" 
@@ -99,13 +103,48 @@
                 material="" 
             >
             </a-entity>
+
+            <a-entity 
+            id="area_1_left" 
+            obj-model="obj:#door_model" 
+            position="0 0 -30.970" 
+            rotation="0 90 0" 
+            scale="" 
+            shadow=""
+            material="" 
+            >
+            </a-entity>
+
+            <a-entity 
+            id="area_1_center" 
+            obj-model="obj:#door_model" 
+            position="0 0 -31" 
+            rotation="" 
+            scale="" 
+            shadow=""
+            material="" 
+            >
+            </a-entity>
+
+            <a-entity 
+            id="area_1_right" 
+            obj-model="obj:#door_model" 
+            position="11.564 0 -30.83" 
+            rotation="0 90 0" 
+            scale="" 
+            shadow=""
+            material="" 
+            >
+            </a-entity>
+
+            <!-- SKYBOX -->
             
             <a-sky color="#ECECEC" ></a-sky>
 
             <a-entity   
                 id="sky"
-                rotation="0 180 0"
-                geometry="primitive: sphere; radius: 1000"
+                rotation="0 90 90"
+                geometry="primitive: sphere; radius: 4000"
                 material="shader: flat; src: #skymap; side: back"
                 loadscripts>
             </a-entity>
@@ -113,7 +152,7 @@
         </a-scene>
         
         <script>
-            senderID = 'player1';            
+            userID = 'player1';            
         </script>
 
         <script src="js/eventSender.js"></script>

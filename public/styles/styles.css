@@ -1,0 +1,47 @@
+body{
+    margin: 0;
+}
+
+#contentWrapper{
+    background-image: url("../assets/images/bg.svg");
+    background-size: cover;
+    height: 100vh;
+}
+
+
+
+#mazeMap{
+    height: 700px;
+    position: absolute;
+}
+
+#mazeBackground{
+    position: absolute;
+}
+
+.button{
+    position: absolute;
+}
+
+#mazeSVG{
+    height: 90vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.regular{
+    opacity: 1;
+    fill: #ff6464;
+}
+
+.readyToOpen{
+    opacity: 1;
+    fill: green;
+}
+
+.fade{
+    opacity: 0;
+    transition: 0.7s opacity;
+}
