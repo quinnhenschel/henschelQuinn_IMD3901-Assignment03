@@ -23,7 +23,6 @@ if(userID == 'player1')
 function svgElementClicked(id)
 {
     socket.emit('svg_clicked', {clicked:id});
-
 }
 
 

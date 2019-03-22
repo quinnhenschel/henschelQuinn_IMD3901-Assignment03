@@ -44,3 +44,8 @@ body{
     transition: 0.7s opacity;
     cursor: default;
 }
+
+.a-canvas.a-grab-cursor:active, .a-grabbing
+{
+    cursor: none;
+}

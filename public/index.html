@@ -5,6 +5,7 @@
         <script src="js/master.js"></script>
         <script src="js/socket.io.min.js"></script>
         <script src="js/position-sender.js"></script>
+        <script src="js/swap-pointer.js"></script>
         <script src="js/event-generator.js"></script>
 
     </head>
@@ -36,12 +37,13 @@
                 <a-asset-item id="ground_model" src="assets/models/ground.obj"></a-asset-item>
                 <a-asset-item id="button_model" src="assets/models/button.obj"></a-asset-item>
                 <a-asset-item id="door_model" src="assets/models/door.obj"></a-asset-item>
+                <a-asset-item id="youWin_model" src="assets/models/youWin.obj"></a-asset-item>
             </a-assets>
 
 
             <!---------------- CAMERA ---------------->
-            <a-entity id="cameraRig" position-sender camera="" wasd-controls="" position="0 2 0" rotation="" look-controls="">
-                <a-entity id="cursor" cursor="rayOrigin: mouse" position="0 0 -1"></a-entity>
+            <a-entity swap-pointer id="cameraRig" position-sender camera="" wasd-controls="" position="0 2 0" rotation="" look-controls="pointerLockEnabled: true;">
+                <a-entity id="cursor" cursor="rayOrigin: #cursor" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02" material="color: white"></a-entity>
             </a-entity>
 
 
@@ -297,6 +299,20 @@
                 >
                 </a-animation>
             </a-entity>
+
+
+        <a-entity 
+            id="youWin" 
+            obj-model="obj:#youWin_model" 
+            position="-2.990 2.951 -62.123" 
+            rotation="0 0 0" 
+            scale="" 
+            shadow=""
+            material="color: #ffffff; emissive: #ffffff; emissiveIntensity: 0.3; " 
+        >
+
+        </a-entity>
+
 
 
         </a-scene>
