@@ -4,6 +4,7 @@
         <script src="js/aframe-v0.8.2.min.js"></script>
         <script src="js/master.js"></script>
         <script src="js/socket.io.min.js"></script>
+        <script src="js/position-sender.js"></script>
         <script src="js/event-generator.js"></script>
 
     </head>
@@ -39,7 +40,7 @@
 
 
             <!---------------- CAMERA ---------------->
-            <a-entity id="cameraRig" position="0 1.9 0" rotation="0 0 0">
+            <a-entity id="cameraRig" position-sender camera="" wasd-controls="" position="0 2 0" rotation="" look-controls="">
                 <a-entity id="cursor" cursor="rayOrigin: mouse" position="0 0 -1"></a-entity>
             </a-entity>
 

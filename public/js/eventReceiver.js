@@ -5,16 +5,28 @@ socket.on('connect', function() {
     area1_available = false;
     area2_available = false;
     area3_available = false;
-    
+    aframe_player_positionX = 0;
+    aframe_player_positionZ = 0;
 });
+
+
+socket.on('playerPosition', function(player1_position){
+    player1_position = player1_position.position.position;  
+    aframe_player_positionX = player1_position.x;
+    aframe_player_positionZ = player1_position.z;
+    
+    if(userID == 'player2'){
+        player = document.querySelector('#Player1');
+        player.setAttribute('x', (aframe_player_positionX * 4.7) + 88);
+        player.setAttribute('y', (aframe_player_positionZ * 4.7) + 295);
+    }
+});
+
 
 socket.on('buttonClicked', function(clickedObj){
     clickedObj = clickedObj.clicked.clicked;
-
-    if (clickedObj == 'startButton')
-    {
-        if (userID == 'player1')
-        {
+    if (clickedObj == 'startButton'){
+        if (userID == 'player1'){
             bgSound = document.querySelector('#ambience');
             bgSound.components['sound'].playSound();
 
@@ -24,13 +36,11 @@ socket.on('buttonClicked', function(clickedObj){
             button.setAttribute('material', {emissive: '#ff6464'});
             button.setAttribute('material', {emissiveIntensity: 0.4});
         }
-        if (userID == 'player2')
-        {
+        if (userID == 'player2'){
             svgElement = document.querySelector('#areaStart');
             svgElement.classList.remove('regular');
             svgElement.classList.add('clickable');
         }
-
     }
     
     if (clickedObj == 'area1StartButton'){
@@ -104,13 +114,10 @@ socket.on('buttonClicked', function(clickedObj){
             console.log("its locked rn");
         }
     }
-
-
 });
 
-socket.on('svgClicked', function(id) {
+socket.on('svgClicked', function(id){
     id = id.clicked.clicked;
-
     if (id == 'areaStart'){
         if(userID == 'player1'){
             anim = document.querySelector('#door1_openAnimation');
@@ -119,7 +126,6 @@ socket.on('svgClicked', function(id) {
             bgSound.components['sound'].stopSound();
             bgSound.components['sound'].playSound();
         }
-    
         if(userID == 'player2'){
             svgElement = document.querySelector('#' + id);
             svgElement.classList.remove('clickable');
@@ -127,8 +133,7 @@ socket.on('svgClicked', function(id) {
         }
     }
     
-    if (area1_available == true)
-    {
+    if (area1_available == true){
         if (id == 'area1_1'){
             area1_available = false;
             if(userID == 'player1'){
@@ -185,8 +190,7 @@ socket.on('svgClicked', function(id) {
 
     /////////////////////////////////////////////
 
-    if(area2_available == true)
-    {
+    if(area2_available == true){
         if (id == 'area2_1'){
             area2_available = false;
             if(userID == 'player1'){
@@ -296,7 +300,5 @@ socket.on('svgClicked', function(id) {
                 svgElement.classList.add('regular');
             }
         }
-    }
-
-    
+    }    
 });

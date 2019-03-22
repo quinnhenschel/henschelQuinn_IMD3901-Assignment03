@@ -10,5 +10,9 @@ AFRAME.registerComponent('event-generator', {
             //Context_AF.eventLogic(el.id);
             clickedButton(el.id);
         });
+
+
+
+        
     }
 });

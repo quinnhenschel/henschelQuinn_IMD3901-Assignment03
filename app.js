@@ -41,7 +41,14 @@ socketIO.on('connection', function(socket) {
 
     socket.on('buttonClicked', function(clickedObj) {
         socketIO.sockets.emit('buttonClicked', {clicked:clickedObj});
-    })
+    });
+
+
+    socket.on('playerPosition', function(player1_position){
+        socketIO.sockets.emit('playerPosition', {position:player1_position})
+    });
+
+    
 
     ////////////////////////////////////////////////////////////////////////////////////
 

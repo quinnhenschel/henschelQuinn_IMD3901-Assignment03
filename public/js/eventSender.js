@@ -12,6 +12,11 @@ if(userID == 'player1')
     {
         socket.emit('buttonClicked', {clicked:clickedObj});
     }
+
+    function sendPosition(player1_position)
+    {
+        socket.emit('playerPosition', {position:player1_position});
+    }
 }
 
 // EVENTS SENT FROM THE MOBILE (WEBPAGE) USER
