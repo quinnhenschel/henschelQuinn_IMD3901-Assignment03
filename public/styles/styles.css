@@ -8,7 +8,11 @@ body{
     height: 100vh;
 }
 
-
+.clickable{
+    opacity: 1;
+    fill: rgb(82, 194, 82);
+    cursor: pointer;
+}
 
 #mazeMap{
     height: 700px;
@@ -16,10 +20,6 @@ body{
 }
 
 #mazeBackground{
-    position: absolute;
-}
-
-.button{
     position: absolute;
 }
 
@@ -34,14 +34,13 @@ body{
 .regular{
     opacity: 1;
     fill: #ff6464;
+    cursor: not-allowed;
 }
 
-.readyToOpen{
-    opacity: 1;
-    fill: green;
-}
+
 
 .fade{
     opacity: 0;
     transition: 0.7s opacity;
+    cursor: default;
 }

@@ -9,24 +9,32 @@
     </head>
               
     <body>
-        <a-scene>
-            <!-------------- TEXTURES ---------------->
+        <a-scene fog="type: linear; color: #A197C1; near: 0.5; far: 30;">
+            <!-------------- TEXTURES  ---------------->
             <a-assets>
                 <img id="skymap" src="assets/textures/skybox.jpg" />
+                <img id="areaTexture" src="assets/textures/layeredRock_albedo.jpg" />
+                <img id="areaNormal" src="assets/textures/layeredRock_normal.jpg" />
+                <img id="groundTexture" src="assets/textures/dirt_albedo.jpg" />
+                <img id="groundNormal" src="assets/textures/dirt_normal.jpg" />
+                <img id="doorTexture" src="assets/textures/mossyRock_albedo.jpg" />
+                <img id="doorNormal" src="assets/textures/mossyRock_normal.jpg" />
             </a-assets>
 
 
             <!-------------- SOUNDS ---------------->
             <a-assets>
-
+                <a-asset-item crossorigin="anonymous" id="ambienceSrc" src="assets/sound/ambience.mp3" response-type="arraybuffer"></a-asset-item>
+                <a-asset-item crossorigin="anonymous" id="doorSoundSrc" src="assets/sound/moving_concrete.mp3" response-type="arraybuffer"></a-asset-item>
             </a-assets>
             
 
             <!---------------- MODELS ---------------->
             <a-assets>
                 <a-asset-item id="maze_model" src="assets/models/maze.obj"></a-asset-item>
+                <a-asset-item id="ground_model" src="assets/models/ground.obj"></a-asset-item>
                 <a-asset-item id="button_model" src="assets/models/button.obj"></a-asset-item>
-                <a-asset-item id="door_model" src="assets/models/door1_1.obj"></a-asset-item>
+                <a-asset-item id="door_model" src="assets/models/door.obj"></a-asset-item>
             </a-assets>
 
 
@@ -37,8 +45,25 @@
 
 
             <!---------------- LIGHTING ---------------->
-            <a-light type="point" color="lightblue" position="0 60 -60" intensity="0.2"></a-light>
+            <a-light type="point" color="lightblue" position="4 60 26.680" intensity="0.2"></a-light>
+            <a-light type="point" color="#bc92ff" position="0 60 -60" intensity="0.1"></a-light>
 
+
+            <!-- SKYBOX -->
+
+            <a-sky color="#ECECEC" ></a-sky>
+
+            <a-entity   
+                id="sky"
+                rotation="0 90 90"
+                geometry="primitive: sphere; radius: 4000"
+                material="shader: flat; src: #skymap; side: back; fog: false;"
+                loadscripts>
+            </a-entity>
+
+            <!-- SOUNDS ENTITIES -->
+            <a-entity id="ambience" sound="src:#ambienceSrc; volume: .1; loop: true; positional:false"></a-entity>
+            <a-entity id="doorSound" sound="src:#doorSoundSrc; volume: .1; loop: false; positional:false"></a-entity>
 
             <!---------------- A-FRAME ENTITIES ---------------->
             
@@ -49,7 +74,21 @@
                 rotation="" 
                 scale="" 
                 shadow=""
+
+                material="sphericalEnvMap: #sky; roughness: 0.6; src: #areaTexture; repeat: 4 4; normalMap: #areaNormal; normalTextureRepeat: 4 4;"
             >
+            </a-entity>
+
+            <a-entity 
+                id="ground" 
+                obj-model="obj:#ground_model" 
+                position="" 
+                rotation="" 
+                scale="" 
+                shadow=""
+
+                material="sphericalEnvMap: #sky; roughness: 0.8; src: #groundTexture; repeat: 15 15; normalMap: #groundNormal; normalTextureRepeat: 15 15;"
+                >
             </a-entity>
 
             <!-- STARTING AREA -->
@@ -57,102 +96,213 @@
             <a-entity 
                 id="startButton" 
                 obj-model="obj:#button_model" 
-                position="3 1.5 -5.258" 
+                position="2.468 1.5 -8.962" 
                 rotation="" 
                 scale="0.75 0.75 0.75" 
                 shadow=""
-                material="color: #ffffff; emissive: #ffffff; emissiveIntensity: 0.3;" 
+                material="color: #52C252; emissive: #52C252; emissiveIntensity: 0.4" 
                 
                 event-generator
             >
             </a-entity>
 
-            <a-entity 
-                id="door1_1" 
-                obj-model="obj:#door_model" 
-                position="" 
-                rotation="" 
-                scale="" 
-                shadow=""
-                material="" 
+            <a-entity
+                id="door1"
+                obj-model="obj:#door_model"
+                position="0.380 0 -9.8"
+                material="sphericalEnvMap: #sky; roughness: 0.8; src: #doorTexture; repeat: 4 4; normalMap: #doorNormal; normalTextureRepeat: 4 4;"
             >
+
+                <a-animation 
+                    id="door1_openAnimation"
+                    attribute="position"
+                    to="0.380 4 -9.8"
+                    dur="4500"
+                    fill="forwards"
+                    begin="door1_animation_start"
+                    >
+                </a-animation>
+
             </a-entity>
+            
+
+
+            
+            
 
             <!-- INTERSECTION 1 -->
 
             <a-entity 
                 id="area1StartButton" 
                 obj-model="obj:#button_model" 
-                position="2.263 1.500 -25" 
-                rotation="0 90 0" 
+                position="0.087 1.500 -17.314" 
+                rotation="0 0 0" 
                 scale="0.75 0.75 0.75" 
                 shadow=""
-                material="color: #ffffff; emissive: #ffffff; emissiveIntensity: 0.3;" 
+                material="color: #52C252; emissive: #52C252; emissiveIntensity: 0.4;" 
                 
                 event-generator
             >
             </a-entity>
 
             <a-entity 
-                id="door2_start" 
+                id="area1_door1" 
                 obj-model="obj:#door_model" 
-                position="0 0 -22.781" 
-                rotation="" 
+                position="-2.520 0 -16.055" 
+                rotation="0 90 0" 
                 scale="" 
                 shadow=""
-                material="" 
+                material="sphericalEnvMap: #sky; roughness: 0.8; src: #doorTexture; repeat: 4 4; normalMap: #doorNormal; normalTextureRepeat: 4 4;"
+                >
+                <a-animation 
+                    id="area1_door1_openAnimation"
+                    attribute="position"
+                    to="-2.520 4 -16.055"
+                    dur="4500"
+                    fill="forwards"
+                    begin="area1_door1_animation_start"
+                >
+                </a-animation>
+            </a-entity>
+
+            <a-entity 
+                id="area1_door2" 
+                obj-model="obj:#door_model" 
+                position="2.711 0 -16.06" 
+                rotation="0 90 0" 
+                scale="" 
+                shadow=""
+                material="sphericalEnvMap: #sky; roughness: 0.8; src: #doorTexture; repeat: 4 4; normalMap: #doorNormal; normalTextureRepeat: 4 4;"
+            >
+                <a-animation 
+                    id="area1_door2_openAnimation"
+                    attribute="position"
+                    to="2.711 4 -16.06"
+                    dur="4500"
+                    fill="forwards"
+                    begin="area1_door2_animation_start"
+                >
+                </a-animation>
+            </a-entity>
+
+
+            <!-- INTERSECTION 2 -->
+
+            <a-entity 
+                id="area2StartButton" 
+                obj-model="obj:#button_model" 
+                position="15.088 1.500 -21.479" 
+                rotation="0 90 0" 
+                scale="0.75 0.75 0.75" 
+                shadow=""
+                material="color: #52C252; emissive: #52C252; emissiveIntensity: 0.4;" 
+                
+                event-generator
             >
             </a-entity>
 
             <a-entity 
-            id="area_1_left" 
-            obj-model="obj:#door_model" 
-            position="0 0 -30.970" 
-            rotation="0 90 0" 
-            scale="" 
-            shadow=""
-            material="" 
+                id="area2_door1" 
+                obj-model="obj:#door_model" 
+                position="10.789 0 -22.786" 
+                rotation="0 90 0" 
+                scale="" 
+                shadow=""
+                material="sphericalEnvMap: #sky; roughness: 0.8; src: #doorTexture; repeat: 4 4; normalMap: #doorNormal; normalTextureRepeat: 4 4;"
+                >
+                <a-animation 
+                    id="area2_door1_openAnimation"
+                    attribute="position"
+                    to="10.789 4 -22.786"
+                    dur="4500"
+                    fill="forwards"
+                    begin="area2_door1_animation_start"
+                >
+                </a-animation>
+            </a-entity>
+
+            <a-entity 
+                id="area2_door2" 
+                obj-model="obj:#door_model" 
+                position="13.826 0 -25.361" 
+                rotation="0 0 0" 
+                scale="" 
+                shadow=""
+                material="sphericalEnvMap: #sky; roughness: 0.8; src: #doorTexture; repeat: 4 4; normalMap: #doorNormal; normalTextureRepeat: 4 4;"
+            >
+                <a-animation 
+                    id="area2_door2_openAnimation"
+                    attribute="position"
+                    to="13.826 4 -25.361"
+                    dur="4500"
+                    fill="forwards"
+                    begin="area2_door2_animation_start"
+                >
+                </a-animation>
+            </a-entity>
+
+
+            <!-- INTERSECTION 3 -->
+
+            <a-entity 
+                id="area3StartButton" 
+                obj-model="obj:#button_model" 
+                position="-18.290 1.500 -37.995" 
+                rotation="0 90 0" 
+                scale="0.75 0.75 0.75" 
+                shadow=""
+                material="color: #52C252; emissive: #52C252; emissiveIntensity: 0.4;" 
+                
+                event-generator
             >
             </a-entity>
 
             <a-entity 
-            id="area_1_center" 
-            obj-model="obj:#door_model" 
-            position="0 0 -31" 
-            rotation="" 
-            scale="" 
-            shadow=""
-            material="" 
-            >
+                id="area3_door1" 
+                obj-model="obj:#door_model" 
+                position="-14.394 0 -36.261" 
+                rotation="0 90 0" 
+                scale="" 
+                shadow=""
+                material="sphericalEnvMap: #sky; roughness: 0.8; src: #doorTexture; repeat: 4 4; normalMap: #doorNormal; normalTextureRepeat: 4 4;"
+                >
+                <a-animation 
+                    id="area3_door1_openAnimation"
+                    attribute="position"
+                    to="-14.394 4 -36.261"
+                    dur="4500"
+                    fill="forwards"
+                    begin="area3_door1_animation_start"
+                >
+                </a-animation>
             </a-entity>
 
             <a-entity 
-            id="area_1_right" 
-            obj-model="obj:#door_model" 
-            position="11.564 0 -30.83" 
-            rotation="0 90 0" 
-            scale="" 
-            shadow=""
-            material="" 
+                id="area3_door2" 
+                obj-model="obj:#door_model" 
+                position="-16.448 0 -39.180" 
+                rotation="0 0 0" 
+                scale="" 
+                shadow=""
+                material="sphericalEnvMap: #sky; roughness: 0.8; src: #doorTexture; repeat: 4 4; normalMap: #doorNormal; normalTextureRepeat: 4 4;"
             >
+                <a-animation 
+                    id="area3_door2_openAnimation"
+                    attribute="position"
+                    to="-16.448 4 -39.180"
+                    dur="4500"
+                    fill="forwards"
+                    begin="area3_door2_animation_start"
+                >
+                </a-animation>
             </a-entity>
 
-            <!-- SKYBOX -->
-            
-            <a-sky color="#ECECEC" ></a-sky>
-
-            <a-entity   
-                id="sky"
-                rotation="0 90 90"
-                geometry="primitive: sphere; radius: 4000"
-                material="shader: flat; src: #skymap; side: back"
-                loadscripts>
-            </a-entity>
 
         </a-scene>
         
         <script>
-            userID = 'player1';            
+            userID = 'player1';
+            document.querySelector('a-scene').addEventListener('loaded', onSceneLoad)            
         </script>
 
         <script src="js/eventSender.js"></script>
