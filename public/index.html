@@ -323,6 +323,37 @@
                     >
                     </a-animation>
                 </a-entity>
+
+
+            <a-entity 
+                id="endDoor" 
+                obj-model="obj:#door_model" 
+                position="-2.977 0 -51.743" 
+                rotation="0 0 0" 
+                scale="" 
+                shadow=""
+                material="sphericalEnvMap: #sky; roughness: 0.8; src: #doorTexture; repeat: 4 4; normalMap: #doorNormal; normalTextureRepeat: 4 4;"
+            >
+                <a-animation 
+                    id="endDoor_openAnimation"
+                    attribute="position"
+                    to="-2.977 4 -51.743"
+                    dur="4500"
+                    fill="forwards"
+                    begin="endDoor_animation_start"
+                >
+                </a-animation>
+
+                <a-animation 
+                    id="endDoor_closeAnimation"
+                    attribute="position"
+                    to="-2.977 0 -51.743"
+                    dur="4500"
+                    fill="forwards"
+                    begin="endDoor_animation_start_close"
+                >
+                </a-animation>
+            </a-entity>
     
     
             <a-entity 
@@ -338,11 +369,22 @@
             </a-entity>
     
             </a-scene>
-            <div id="timerText" style="position:absolute; top:0px; left:0px; z-index:1000; display: none">
+
+            <style>
+                .visible{
+                    position:absolute; top:0px; left:0px; z-index:1000; display: inline;
+                }
+            </style>
+
+            <div id="timerText2" class="">
+
                 <h2 id="player1_timer" style="color: white; display: inline;  font-family: sans-serif">You have </h2>   
                 <h2 id="player1_secondsRemaining" style="color: white; display: inline;  font-family: sans-serif">XX</h2> 
                 <h2 id="player1_timer" style="color: white; display: inline; font-family: sans-serif">seconds to make it to the exit</h2> 
             </div>
+            <div id="timerText" class="">
+                    <h2 id="player1_timer" style="color: white; display: inline;  font-family: sans-serif">Press the button at the begining of the maze to start challenge timer! </h2>   
+                </div>
         </div>
         
 

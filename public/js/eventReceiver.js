@@ -8,12 +8,21 @@ socket.on('connect', function() {
     aframe_player_positionX = 0;
     aframe_player_positionZ = 0;
     mode = 1;
+    textVisible = false
     console.log(mode);
 });
 
 socket.on('timerDone', function(){
     console.log("timer done");
     resetTimer();
+
+    if (userID == 'player2')
+    {
+        svgElement = document.querySelector('#endDoor');
+        svgElement.classList.remove('regular');
+        svgElement.classList.add('clickable');
+    }
+
 });
 
 socket.on('playerPosition', function(player1_position){
@@ -32,17 +41,43 @@ socket.on('playerPosition', function(player1_position){
 socket.on('buttonClicked', function(clickedObj){
     clickedObj = clickedObj.clicked.clicked;
     
-    if (clickedObj == 'startTimerButton')
+
+    if (clickedObj == 'startTimerButton' && textVisible == false)
     {
-        console.log("start-timer");
+
+        textVisible = true;
         resetTimer();
-        countdown = document.querySelector('#timerText');
-        countdown.setAttribute('style', {display: 'inline', top: '0px', left: '0px', z,index:1000});
+        text = document.querySelector('#timerText');
+        text.classList.add('visible');
+        text = document.querySelector('#timerText2');
+        text.classList.remove('visible');
     }
     
-    if (clickedObj == 'resetTimerButton')
+    if (clickedObj == 'resetTimerButton' && textVisible == true)
     {
-        console.log("reset-timer");
+        if(userID == 'player1')
+        {
+            anim = document.querySelector('#endDoor_openAnimation');
+            anim.emit('endDoor_animation_start');
+            bgSound = document.querySelector('#doorSound');
+            bgSound.components['sound'].stopSound();
+            bgSound.components['sound'].playSound();
+
+
+    
+        }
+        if(userID == 'player2')
+        {
+            svgElement = document.querySelector('#endDoor');
+            svgElement.classList.remove('clickable');
+            svgElement.classList.add('regular');
+        }
+
+        textVisible = false;
+        text = document.querySelector('#timerText');
+        text.classList.remove('visible');
+        countdown = document.querySelector('#timerText2');
+        countdown.classList.add('visible');
         resetTimer();
     }
     
@@ -324,5 +359,26 @@ socket.on('svgClicked', function(id){
                 svgElement.classList.add('regular');
             }
         }
-    }    
+
+
+    } 
+    
+    if (id == 'endDoor'){
+        console.log("end door clicked");
+        if(userID == 'player1'){
+            anim = document.querySelector('#endDoor_closeAnimation');
+            anim.emit('endDoor_animation_start_close');
+            bgSound = document.querySelector('#doorSound');
+            bgSound.components['sound'].stopSound();
+            bgSound.components['sound'].playSound();
+            console.log("hgrtg");
+        }
+    
+        if(userID == 'player2'){
+            svgElement = document.querySelector('#' + id);
+            svgElement.classList.remove('clickable');
+
+
+        }
+    }
 });
