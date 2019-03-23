@@ -7,8 +7,14 @@ socket.on('connect', function() {
     area3_available = false;
     aframe_player_positionX = 0;
     aframe_player_positionZ = 0;
+    mode = 1;
+    console.log(mode);
 });
 
+socket.on('timerDone', function(){
+    console.log("timer done");
+    resetTimer();
+});
 
 socket.on('playerPosition', function(player1_position){
     player1_position = player1_position.position.position;  
@@ -25,11 +31,26 @@ socket.on('playerPosition', function(player1_position){
 
 socket.on('buttonClicked', function(clickedObj){
     clickedObj = clickedObj.clicked.clicked;
+    
+    if (clickedObj == 'startTimerButton')
+    {
+        console.log("start-timer");
+        resetTimer();
+        countdown = document.querySelector('#timerText');
+        countdown.setAttribute('style', {display: 'inline', top: '0px', left: '0px', z,index:1000});
+    }
+    
+    if (clickedObj == 'resetTimerButton')
+    {
+        console.log("reset-timer");
+        resetTimer();
+    }
+    
     if (clickedObj == 'startButton'){
         if (userID == 'player1'){
             bgSound = document.querySelector('#ambience');
             bgSound.components['sound'].playSound();
-
+            
             console.log("start");
             button = document.querySelector('#startButton');
             button.setAttribute('material', {color: '#ff6464'});
@@ -40,6 +61,9 @@ socket.on('buttonClicked', function(clickedObj){
             svgElement = document.querySelector('#areaStart');
             svgElement.classList.remove('regular');
             svgElement.classList.add('clickable');
+            mode = 2;
+            resetTimer()
+            console.log(mode);
         }
     }
     

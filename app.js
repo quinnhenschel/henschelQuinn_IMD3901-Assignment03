@@ -31,6 +31,10 @@ socketIO.on('connection', function(socket) {
 
     ///////////////////// CUSTOM SOCKET EVENT LISTENERS + FUNCTIONS /////////////////////
 
+    socket.on('timerDone', function(){
+        socketIO.sockets.emit('timerDone', {});
+    });
+
     //////////// FROM PLAYER 2 ////////////
 
     socket.on('svg_clicked', function(id) {
